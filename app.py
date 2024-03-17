@@ -24,7 +24,14 @@ clf = Pipeline([
     ('nb', MultinomialNB())
 ])
 clf.fit(x_train, y_train)
-
+conn = get_connection()
+    # Create table if not exists
+    conn.execute('''
+        CREATE TABLE IF NOT EXISTS Email_checkers (
+            Mail TEXT,
+            Result TEXT
+        )
+    ''')
 # Streamlit UI
 st.title("Email Spam Detector")
 st.markdown("Please enter the mail below to check if it is ham or spam:")
@@ -38,15 +45,6 @@ if st.button("Check"):
         st.text("Oops! The mail is a spam!")
     else:
         st.text("Hurray!! It is not a spam mail!")
-
-    conn = get_connection()
-    # Create table if not exists
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS Email_checkers (
-            Mail TEXT,
-            Result TEXT
-        )
-    ''')
 
     # Insert data
     conn.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
