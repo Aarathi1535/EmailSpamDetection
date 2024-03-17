@@ -8,4 +8,4 @@ In this Machine Learning application, the user can predict whether the mail they
   In this stage of algorithm the model receives the textual information i.e categorical values and converts them into binary information. 
 - Lastly, displaying the output i.e Spam or Ham
 
-Check out this model deployed by streamlit here : https://emailspamdetection-byaarathi.streamlit.app/
+Check out this model deployed by streamlit here : https://emailspamdetection-byaarathi1535.streamlit.app/
