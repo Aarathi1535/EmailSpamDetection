@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
-@st.cache_resource(max_entries=5)
+@st.cache_resource()
 def get_connection():
     return sqlite3.connect("email_db.sqlite")
 # Load data
