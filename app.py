@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
-@st.cache_resource()
+@st.cache_resource(allow_output_mutation=True)
 def get_connection():
     return sqlite3.connect("email_db.sqlite")
 # Load data
@@ -24,14 +24,7 @@ clf = Pipeline([
     ('nb', MultinomialNB())
 ])
 clf.fit(x_train, y_train)
-conn = get_connection()
-    # Create table if not exists
-    conn.execute('''
-        CREATE TABLE IF NOT EXISTS Email_checkers (
-            Mail TEXT,
-            Result TEXT
-        )
-    ''')
+
 # Streamlit UI
 st.title("Email Spam Detector")
 st.markdown("Please enter the mail below to check if it is ham or spam:")
@@ -47,7 +40,8 @@ if st.button("Check"):
         st.text("Hurray!! It is not a spam mail!")
 
     # Insert data
+    conn = get_connection()
     conn.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
+    conn.commit()
     st.write("Data written successfully")
-conn.commit()
 
