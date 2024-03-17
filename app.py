@@ -9,7 +9,7 @@ import sqlite3
 def get_connection():
     return sqlite3.connect("email_db.sqlite")
 # Load data
-data = pd.read_csv(r"C:\Users\hp\Downloads\spam.csv")
+data = pd.read_csv("spam.csv")
 data['spam'] = data['Category'].apply(lambda x: 1 if x == 'spam' else 0)
 data = data.drop('Category', axis=1)
 
