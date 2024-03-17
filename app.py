@@ -48,5 +48,5 @@ if st.button("Check"):
 
     # Insert data
     conn.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
-    conn.commit()
+conn.commit()
 
