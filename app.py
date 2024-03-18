@@ -6,6 +6,9 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
 @st.cache_resource(allow_output_mutation=True)
+def get_connection():
+    conn = sqlite3.connect("email.db")
+    return conn
 # Load data
 data = pd.read_csv("spam.csv")
 data['spam'] = data['Category'].apply(lambda x: 1 if x == 'spam' else 0)
