@@ -42,7 +42,8 @@ if st.button("Check"):
 
     try:
         conn = get_connection()
-        conn.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
+        c = conn.cursor()
+        c.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
         conn.commit()
         st.success("Data inserted successfully!")
     except sqlite3.Error as e:
