@@ -6,15 +6,6 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
 @st.cache_resource(allow_output_mutation=True)
-import os
-directory_path = "email.db"
-if os.access(directory_path, os.W_OK):
-    print("Write permission is granted.")
-else:
-    print("Write permission is not granted.")
-
-def get_connection():
-    return sqlite3.connect("email.db")
 # Load data
 data = pd.read_csv("spam.csv")
 data['spam'] = data['Category'].apply(lambda x: 1 if x == 'spam' else 0)
