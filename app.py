@@ -7,30 +7,12 @@ from sklearn.pipeline import Pipeline
 import sqlite3
 @st.cache_resource(allow_output_mutation=True)
 def get_connection():
-    return sqlite3.connect("email_db.sqlite")
+    return sqlite3.connect("email.db")
 # Load data
 data = pd.read_csv("spam.csv")
 data['spam'] = data['Category'].apply(lambda x: 1 if x == 'spam' else 0)
 data = data.drop('Category', axis=1)
-page_bg_img = f"""
-<style>
-[data-testid="stAppViewContainer"] > .main {{
-background-image: url("https://images.unsplash.com/photo-1532024802178-20dbc87a312a?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80");
-background-size: 100%;
-display: flex;
-background-position: top left;
-background-repeat: no-repeat;
-background-attachment: local;
-}}
-[data-testid="stHeader"] {{
-background: rgba(0,0,0,0);
-}}
-[data-testid="stToolbar"] {{
-right: 2rem;
-}}
-</style>
-"""
-st.markdown(page_bg_img, unsafe_allow_html=True)
+
 # Split data
 x = data['Message']
 y = data['spam']
