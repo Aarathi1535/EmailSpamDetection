@@ -43,7 +43,6 @@ if st.button("Check"):
         conn = get_connection()
         conn.execute('INSERT INTO Email_checkers (Mail, Result) VALUES (?, ?)', (mail, "Spam" if res == 1 else "Ham"))
         conn.commit()
-        st.write("Data written successfully")
     except Exception as e:
         st.error(f"Error occurred: {str(e)}")
 
