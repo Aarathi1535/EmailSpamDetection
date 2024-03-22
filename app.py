@@ -7,7 +7,9 @@ from sklearn.pipeline import Pipeline
 import sqlite3
 def get_connection():
     conn = sqlite3.connect("email_db.sqlite")
+    conn.execute('CREATE TABLE IF NOT EXISTS Email_checker (Mail TEXT, Result TEXT);')
     return conn
+
 # Load data
 data = pd.read_csv("spam.csv")
 data['spam'] = data['Category'].apply(lambda x: 1 if x == 'spam' else 0)
