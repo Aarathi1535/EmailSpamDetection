@@ -6,8 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
 def get_connection():
-    conn = sqlite3.connect("email_db.sqlite")
-    conn.execute('CREATE TABLE IF NOT EXISTS Email_checker (Mail TEXT, Result TEXT);')
+    conn = sqlite3.connect("email.sqlite")
     return conn
 
 # Load data
