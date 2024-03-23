@@ -6,7 +6,7 @@ from sklearn.feature_extraction.text import CountVectorizer
 from sklearn.pipeline import Pipeline
 import sqlite3
 def get_connection():
-    conn = sqlite3.connect("email.sqlite")
+    conn = sqlite3.connect("emails.sqlite")
     return conn
 
 # Load data
